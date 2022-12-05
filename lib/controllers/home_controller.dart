@@ -13,9 +13,19 @@ class HomeController extends ChangeNotifier {
   // temperature
   bool isCoolTempSelected = true;
 
-  //tyre
-  bool isShowTyre = false;
+  // tyre
+  bool isShowTyreController = false;
+  bool isShowTyreStatus = false;
 
+  void onSelectedBottomTabChange({required int index}) {
+    if (selectedBottomTabIndex == index) {
+      return;
+    }
+    selectedBottomTabIndex = index;
+    notifyListeners();
+  }
+
+  // doors
   void updateRightDoorLock() {
     isRightDoorLock = !isRightDoorLock;
     notifyListeners();
@@ -36,28 +46,37 @@ class HomeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onSelectedBottomTabChange({required int index}) {
-    if (selectedBottomTabIndex == index) {
-      return;
-    }
-    selectedBottomTabIndex = index;
-    notifyListeners();
-  }
-
+  // temperature
   void updateCoolTempSelected() {
     isCoolTempSelected = !isCoolTempSelected;
     notifyListeners();
   }
 
+  // tyre
   void showTyreController(int index) {
     if (selectedBottomTabIndex != 3 && index == 3) {
       Future.delayed(const Duration(milliseconds: 400), () {
-        isShowTyre = true;
+        isShowTyreController = true;
         notifyListeners();
       });
     } else {
-      isShowTyre = false;
+      isShowTyreController = false;
       notifyListeners();
+    }
+  }
+
+  void tyreStatusController(int index) {
+    if (selectedBottomTabIndex != 3 && index == 3) {
+      isShowTyreStatus = true;
+      notifyListeners();
+    } else {
+      Future.delayed(
+        Duration(milliseconds: 800),
+        () {
+          isShowTyreStatus = false;
+          notifyListeners();
+        },
+      );
     }
   }
 }
