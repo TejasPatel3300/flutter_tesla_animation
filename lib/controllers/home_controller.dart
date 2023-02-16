@@ -71,7 +71,7 @@ class HomeController extends ChangeNotifier {
       notifyListeners();
     } else {
       Future.delayed(
-        Duration(milliseconds: 800),
+        const Duration(milliseconds: 800),
         () {
           isShowTyreStatus = false;
           notifyListeners();
